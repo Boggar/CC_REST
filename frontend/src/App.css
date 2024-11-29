@@ -60,6 +60,18 @@ input {
 .todo-card span {
   flex-grow: 1;
   margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Ensure the input for description fits within the card */
+.todo-card input[type="text"] {
+  width: 90%; /* Restrict width to 90% of the card */
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box; /* Include padding in width calculation */
+  font-size: 14px;
 }
 
 /* Style for the buttons */
@@ -69,6 +81,7 @@ input {
   border: none;
   border-radius: 3px;
   cursor: pointer;
+  width: 80%; /* Ensure buttons are not wider than the card */
 }
 
 .todo-card button.edit {

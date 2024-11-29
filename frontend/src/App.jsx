@@ -12,7 +12,7 @@ function App() {
 
   const fetchTodos = async () => {
     try {
-      const response = await fetch("http://localhost:2000/tasks");
+      const response = await fetch("http://localhost:2000/tasks/");
       if (!response.ok) {
         throw new Error("Fehler beim Laden der Todos");
       }
