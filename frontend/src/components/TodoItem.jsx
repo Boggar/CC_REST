@@ -18,14 +18,6 @@ function TodoItem({ todo, updateTodo, deleteTodo }) {
     setDescription(e.target.value);
   };
 
-  const handleDescriptionSave = () => {
-    const updatedTodo = {
-      name: todo.name,
-      description: description,
-    };
-    updateTodo(todo.id, updatedTodo);
-  };
-
   return (
     <li className="todo-card">
       <span style={{ fontWeight: "bold", marginBottom: "10px" }}>
