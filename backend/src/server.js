@@ -2,6 +2,7 @@
 
 const express = require("express");
 const cors = require("cors");
+const fs = require("fs");
 
 // Initialize App
 const app = express();
@@ -21,6 +22,21 @@ app.listen(PORT, () => {
 let tasks = [];
 let nextId = 1;
 
+// Load tasks from data.json
+if (fs.existsSync("data.json")) {
+  const data = fs.readFileSync("data.json", "utf-8");
+  tasks = JSON.parse(data);
+
+  // Set nextId to the highest existing id + 1
+  if (tasks.length > 0) {
+    nextId = Math.max(...tasks.map((task) => task.id)) + 1;
+  }
+}
+
+function saveTasks() {
+  fs.writeFileSync("data.json", JSON.stringify(tasks, null, 2));
+}
+
 // Get all tasks
 app.get("/tasks", (req, res) => {
   res.json(tasks);
@@ -34,16 +50,20 @@ app.post("/tasks", (req, res) => {
   }
 
   const newTask = {
-    id: nextId++,
+    id: nextId,
     name,
     description,
   };
+  nextId++;
+
   tasks.push(newTask);
+  saveTasks();
   res.status(201).json(newTask);
 });
 
 // Update a task
 app.put("/tasks/:id", (req, res) => {
+  // Find the task with the given id
   const id = parseInt(req.params.id);
   const task = tasks.find((task) => task.id === id);
 
@@ -59,5 +79,22 @@ app.put("/tasks/:id", (req, res) => {
   if (description) {
     task.description = description;
   }
+
+  // Return the updated task
+  saveTasks();
   res.json(task);
+});
+
+// Delete a task
+app.delete("/tasks/:id", (req, res) => {
+  const taskId = parseInt(req.params.id, 10);
+  const taskIndex = tasks.findIndex((t) => t.id === taskId);
+
+  if (taskIndex === -1) {
+    return res.status(404).json({ error: "Task not found" });
+  }
+
+  tasks.splice(taskIndex, 1);
+  saveTasks();
+  res.status(204).send();
 });
