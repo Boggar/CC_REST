@@ -1,7 +1,15 @@
 function TodoItem({ todo, updateTodo, deleteTodo }) {
   const handleUpdate = () => {
-    const updatedTodo = { ...todo, completed: !todo.completed };
+    const updatedTodo = {
+      name: todo.name,
+      description: todo.description,
+      completed: todo.completed,
+    };
     updateTodo(todo.id, updatedTodo);
+  };
+
+  const handleDelete = () => {
+    deleteTodo(todo.id);
   };
 
   return (
@@ -9,10 +17,12 @@ function TodoItem({ todo, updateTodo, deleteTodo }) {
       <span
         style={{ textDecoration: todo.completed ? "line-through" : "none" }}
       >
-        {todo.title}
+        {todo.name} {}
       </span>
-      <button className="edit">Edit</button>
-      <button className="delete" onClick={() => deleteTodo(todo.id)}>
+      <button className="edit" onClick={handleUpdate}>
+        Edit
+      </button>
+      <button className="delete" onClick={handleDelete}>
         Delete
       </button>
       <button className="done" onClick={handleUpdate}>

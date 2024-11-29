@@ -1,24 +1,34 @@
 import { useState } from "react";
 
 function TodoForm({ addTodo }) {
-  const [title, setTitle] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim()) return;
-    addTodo({ title, completed: false });
-    setTitle("");
+    if (!name.trim() || !description.trim()) return;
+
+    // Übergebe das richtige Format an die addTodo-Funktion
+    addTodo({ name, description });
+    setName("");
+    setDescription("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <input
         type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Add a new to-do"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Task Name"
       />
-      <button id="add" type="submit" method="POST">
+      <input
+        type="text"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Task Description"
+      />
+      <button id="add" type="submit" onClick={handleSubmit}>
         Add
       </button>
     </form>
