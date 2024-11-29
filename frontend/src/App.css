@@ -1,42 +1,87 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Apply a gradient background */
+body {
+  background: linear-gradient(to right, lightgreen, lightblue);
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: auto; /* Ensure the body is scrollable */
+}
+
+/* Center the h1 in the middle */
+.App {
   text-align: center;
+  width: 100%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h1 {
+  margin-top: 20px;
+  font-size: 4rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Style for the to-do list */
+ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Style for the input and button */
+input {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 600px;
 }
 
-.card {
-  padding: 2em;
+#add {
+  width: 100px;
+  height: 35px;
 }
 
-.read-the-docs {
-  color: #888;
+/* Style for each to-do card */
+.todo-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-card span {
+  flex-grow: 1;
+  margin-bottom: 10px;
+}
+
+/* Style for the buttons */
+.todo-card button {
+  margin: 5px 0;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.todo-card button.edit {
+  background-color: #ffc107;
+  color: white;
+}
+
+.todo-card button.delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.todo-card button.done {
+  background-color: #28a745;
+  color: white;
 }
