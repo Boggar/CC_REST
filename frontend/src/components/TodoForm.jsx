@@ -1,11 +1,12 @@
 import { useState } from "react";
 
-function TodoForm() {
+function TodoForm({ addTodo }) {
   const [title, setTitle] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // For now, just clear the input field
+    if (!title.trim()) return;
+    addTodo({ title, completed: false });
     setTitle("");
   };
 
@@ -17,7 +18,9 @@ function TodoForm() {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Add a new to-do"
       />
-      <button type="submit">Add</button>
+      <button id="add" type="submit" method="POST">
+        Add
+      </button>
     </form>
   );
 }
